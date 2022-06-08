@@ -1,0 +1,18 @@
+SELECT *
+FROM summer_games;
+
+SELECT *
+FROM winter_games;
+
+----Create a query to generate the report below. 
+--a. Display the country name, 4-digit year, count of Nobel prize winners when that 
+--count is at least 1, and country size according to the following business rule:
+--large - population greater than 100 million
+--medium – population between 50 and 100 million
+--small – less than 50 million
+
+SELECT country_id, year, nobel_prize_winners
+FROM country_stats
+WHERE Nobel_prize_winners >=1
+Order By
+union 

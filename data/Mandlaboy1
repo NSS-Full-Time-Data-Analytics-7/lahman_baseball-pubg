@@ -1,0 +1,91 @@
+SELECT *
+FROM PEOPLE;
+
+
+SELECT *
+FROM people;
+
+SELECT MIN(yearid) AS newest_year,
+		MAX(yearid) AS oldest_year
+FROM teams
+
+SELECT CONCAT( p.namefirst,' ',p.namelast) AS name, p.height, ap.g_all, tm.name
+FROM people AS p
+LEFT JOIN appearances AS ap
+ON p.playerid = ap.playerid
+RIGHT JOIN teams AS tm
+ON ap.teamid = tm.teamid
+WHERE height IS NOT NULL
+ORDER BY height
+LIMIT 1;
+
+SELECT p.namegiven AS name, height, G_all, t.name AS team
+FROM people AS p INNER JOIN appearances AS a ON p.playerid = a.playerid
+				 INNER JOIN teams AS t ON a.teamid=t.teamid
+ORDER BY height
+LIMIT 1
+
+
+SELECT * FROM public.people
+ORDER BY height ASC
+
+-------------------------------------------------------------------------------------------------
+
+-- (5) Find the average number of strikeouts per game by decade since 1920. 
+--Round the numbers you report to 2 decimal places.
+--Do the same for home runs per game. Do you see any trends?	
+
+SELECT Round((sum(so)/sum (g) ::decimal),2),
+SELECT Round((sum(hr)/sum(g) ::decimal),2),
+
+   case when yearid between 1920 and 1929 then '1920s'
+		when yearid between 1930 and 1939 then '1930s'	
+		when yearid between 1940 and 1949 then '1940s'
+	    when yearid between 1950 and 1959 then '1950s'
+		when yearid between 1960 and 1969 then '1960s'
+		when yearid between 1970 and 1979 then '1970s'
+		when yearid between 1980 and 1989 then '1980s'
+		when yearid between 1990 and 1999 then '2000s'
+		when yearid between 2000 and 2009 then '2020s'
+		END AS decade
+   
+FROM teams 
+    
+Where yearid > 1920
+    
+GROUP BY decade
+ORDER BY decade                                                                           
+
+--(6) Find the player who had the most success stealing bases in 2016, where __success__ is
+--measured as the percentage of stolen base attempts which are successful. (A stolen base attempt
+--results either in a stolen base or being caught stealing.) Consider only players who attempted _at least_ 20 stolen bases.
+
+SELECT Playerid
+
+
+
+
+
+SELECT SUM(sa.salary) AS dough,
+       s.schoolname, p.namefirst, p.namelast
+  FROM schools s
+       INNER JOIN collegeplaying c
+       ON s.schoolid = c.schoolid
+	  INNER JOIN people p
+       ON p.playerid = c.playerid
+	  INNER JOIN salaries sa
+       ON p.playerid = sa.playerid
+ WHERE LOWER(s.schoolname) LIKE '%vanderbilt%'
+ GROUP BY namefirst, namelast, s.schoolname
+ ORDER BY dough DESC
+
+
+SELECT CONCAT( p.namefirst,' ',p.namelast) AS name, p.stealing, ap.g_all, tm.name
+FROM people AS p
+LEFT JOIN appearances AS ap
+ON p.playerid = ap.playerid
+RIGHT JOIN teams AS tm
+ON ap.teamid = tm.teamid
+WHERE height IS NOT NULL
+ORDER BY 
+LIMIT 1;
