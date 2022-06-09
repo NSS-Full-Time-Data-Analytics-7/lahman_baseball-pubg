@@ -60,11 +60,16 @@ ORDER BY decade
 --measured as the percentage of stolen base attempts which are successful. (A stolen base attempt
 --results either in a stolen base or being caught stealing.) Consider only players who attempted _at least_ 20 stolen bases.
 
-SELECT Playerid
+SELECT sb, cs, people.playerid
+From people inner Join batting on people.playerid= batting.playerid;
 
 
+Where year= 2016 
+Order By (cs) and (sb) 
+having =< 20 sb DESC
 
 
+ 
 
 SELECT SUM(sa.salary) AS dough,
        s.schoolname, p.namefirst, p.namelast
